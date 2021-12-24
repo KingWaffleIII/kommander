@@ -56,7 +56,8 @@ server {
 
 ### SMTP
 
-**Additionally, Django has support for password reset emails. To use this feature, you must fill in the details of an email account in `kommander/email_config.json`.**
+**Django has support for password reset emails. To use this feature, you must fill in the details of an email account in `kommander/email_config.json`.**
+**Additionally, you must also change `init_sites.py` and replace `kommander.planetwaffle.net` with your own production domain and `dev.planetwaffle.net` with your own development domain. These can be `http://localhost`.**
 
 ### Superuser Account
 
