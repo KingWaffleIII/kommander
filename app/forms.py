@@ -119,7 +119,7 @@ class ConnectionForm(forms.Form):
         private_key = cleaned_data.get("private_key")
 
         if not password and not private_key:
-            raise forms.ValidationError("You must enter a password or a private key!")
+            self.add_error("password", "You must enter a password or a private key!")
         
         return cleaned_data
 

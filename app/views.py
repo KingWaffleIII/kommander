@@ -125,6 +125,9 @@ def home(request):
                 }
 
                 return terminal(request)
+            else:
+                connections = models.Configuration.objects.filter(user=request.user)
+                return render(request, 'app/home.html', {'form': form, 'connections': connections})
 
         form = forms.ConnectionForm()
         connections = models.Configuration.objects.filter(user=request.user)
