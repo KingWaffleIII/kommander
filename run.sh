@@ -1,19 +1,23 @@
 #!/bin/bash
 
-while getopts i:m:p:a: flag
+while getopts i:m:p:a:s: flag
 do
 	case "${flag}" in
 		i) install=${OPTARG};;
 		m) mode=${OPTARG};;
 		p) port=${OPTARG};;
 		a) api_port=${OPTARG};;
+		s) silent=${OPTARG};;
 	esac
 done
 
+if [ "$silent" != "yes" ]
+then
 echo -e "\nThis script requires superuser privileges to restart Nginx for updates to static files to take effect.\n"
 if [ "$(sudo -v)" == "Sorry, user $USER may not run sudo on $HOST" ]; then
 	echo "\nYou have superuser permissions to use this script.\n"
 	exit 1
+fi
 fi
 
 file="./kommander/settings.py"
@@ -38,7 +42,7 @@ if [ "$install" == "yes" ]
 then
 	echo -e "\nInstall flag supplied: installing dependencies...\n"
 
-	npm --prefix ./api install
+	npm --prefix ./menshen install
 
 	python3.10 -m pip install -r ./requirements.txt
 else
@@ -74,11 +78,17 @@ DJANGO_SUPERUSER_USERNAME=admin \
 DJANGO_SUPERUSER_EMAIL=kingwaffl3iii@gmail.com \
 python3.10 manage.py createsuperuser --no-input
 
+if [ "$silent" != "yes" ]
+then
 echo $PASSWORD | sudo -S systemctl stop nginx
+fi
 
-python3 manage.py collectstatic --no-input
+python3.10 manage.py collectstatic --no-input
 
+if [ "$silent" != "yes" ]
+then
 echo $PASSWORD | sudo -S systemctl start nginx
+fi
 
 echo -e "\nStarting the server...\n"
 

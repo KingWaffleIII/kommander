@@ -77,6 +77,9 @@ server {
 
 > `-a`: the port that the SSH gateway server should run on.
 
+> `-s`: whether or not to enable silent mode. This will disable all requests for input.
+> Anything that isn't `yes` will be treated as `no`.
+
 ## Menshen
 
 **Menshen is the underlying server that powers Kommander. It is the service that acts as a gateway (hence the name 'Menshen', after the Chinese divine guardians of doors and gates) between the user and the remote server.**
