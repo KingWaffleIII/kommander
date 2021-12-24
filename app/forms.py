@@ -25,9 +25,9 @@ class LoginForm(forms.Form):
             user = models.User.objects.get(email=email)
 
             if not user.check_password(password):
-                raise forms.ValidationError('Invalid email or password.')
+                self.add_error('password', 'Invalid email or password.')
         except models.User.DoesNotExist:
-            raise forms.ValidationError('Invalid email or password.')
+            self.add_error('email', 'Invalid email or password.')
 
         return cleaned_data
 
