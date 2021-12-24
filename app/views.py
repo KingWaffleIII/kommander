@@ -124,7 +124,7 @@ def home(request):
                     'private_key': private_key if private_key else None,
                 }
 
-                return terminal(request)
+                return redirect('app:terminal')
             else:
                 connections = models.Configuration.objects.filter(user=request.user)
                 return render(request, 'app/home.html', {'form': form, 'connections': connections})
