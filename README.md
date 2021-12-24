@@ -13,6 +13,8 @@
 
 > git clone https://github.com/KingWaffleIII/kommander.git
 
+**Kommander depends on Python v3.10!**
+
 ## Configuration
 
 ### Nginx
@@ -61,7 +63,7 @@ server {
 
 ### Superuser Account
 
-**You must also change lines 53-56 in `run.sh` to your preference to set the Django administrator account. You need to supply an email and a password.**
+**You must also change the environment variables in `run.sh` for `python3.10 manage.py createsuperuser --no-input` to your preference to set the Django administrator account. You need to supply an email and a password.**
 
 ## Usage
 
