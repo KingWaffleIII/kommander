@@ -1,0 +1,52 @@
+{% extends 'app/base.html' %} {% block 'content' %}
+<h3>Connections</h3>
+{% for connection in connections %}
+<h5>{{ connection.username }}@{{ connection.host }}:{{ connection.port }}</h5>
+<button
+	type="button"
+	class="btn btn-primary"
+	onclick="window.location.href = `${window.location.href}terminal?id={{ connection.id }}`;"
+>
+	Connect
+</button>
+<button
+	type="button"
+	class="btn btn-secondary"
+	onclick="window.location.href = `${window.location.href}edit?id={{ connection.id }}`;"
+>
+	Edit
+</button>
+<button
+	type="button"
+	class="btn btn-danger"
+	onclick="window.location.href = `${window.location.href}delete?id={{ connection.id }}`;"
+>
+	Delete
+</button>
+<br />
+{% endfor %}
+<br />
+<form method="post">
+	<h4>Create a New Connection</h4>
+	<h5>Note: you need either a password or private key or both.</h5>
+	<form method="post">
+		{% csrf_token %} {% for field in form %}
+		<div class="fieldWrapper mb-3">
+			{% if field.errors %} {% for error in field.errors %}
+			<script>
+				const messages = document.getElementById("messages-list");
+				messages.innerHTML += `
+<div class="alert alert-danger alert-dismissible" role="alert" >
+{{ error }}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+`;
+			</script>
+			{% endfor %} {% endif %} {{ field.label_tag }} {{ field }}
+			<p class="help">{{ field.help_text|safe }}</p>
+		</div>
+		{% endfor %}
+		<button type="submit" class="btn btn-primary">Connect</button>
+	</form>
+</form>
+{% endblock %}

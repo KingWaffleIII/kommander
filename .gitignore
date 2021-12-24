@@ -1,0 +1,20 @@
+# ignore node_modules
+node_modules/
+
+# ignore pycache
+__pycache__/
+
+# ignore config.js since it contains sensitive information
+config.js
+
+# ignore .prettierignore
+.prettierignore
+
+# ignore migrations
+migrations/
+
+# ignore db
+*.sqlite3
+
+# ignore email_config.json
+email_config.json

@@ -1,0 +1,46 @@
+{% extends 'app/base.html' %} {% block 'content' %}
+<div class="mb-3">
+	<h4>Change Password</h4>
+	<button
+		type="button"
+		class="btn btn-primary"
+		onclick="window.location.href='/accounts/password_change'"
+	>
+		Change Password
+	</button>
+</div>
+<div class="mb-3">
+	<h4>2FA</h4>
+	{% if 2fa %}
+	<button
+		type="button"
+		class="btn btn-primary"
+		onclick="enable2FA('{{ csrf_token }}');"
+	>
+		Enable 2FA
+	</button>
+	<br /><br />
+	<h5 align="center" style="display: none" id="qr-header">
+		Please scan the following QR code into your authenticator app and then press
+		Next:
+	</h5>
+	<div align="center" id="qr-code"></div>
+	<br />
+	<button
+		type="button"
+		class="btn btn-primary"
+		onclick="enterOTP();"
+		style="display: none"
+		id="qr-button"
+		align="center"
+	>
+		Next
+	</button>
+	{% else %}
+	<button type="button" class="btn btn-primary" onclick="disable2FA();">
+		Disable 2FA
+	</button>
+	{% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %} {% block 'content' %}
+<h2>Welcome to Kommander!</h2>
+<br />
+<h4>
+	Kommander is a simple web-based SSH client (developed by
+	<a href="https://github.com/KingWaffleIII" target="_blank">KingWaffleIII</a>).
+</h4>
+<h5>
+	Kommander is powered by an internal service called Menshen. Menshen is the
+	internal service that connects the user and the remote server like a gateway
+	(hence the name 'Menshen', after the Chinese divine guardians of doors and
+	gates). You must first log in to use Kommander.
+</h5>
+<br />
+<h4>Privacy Notice:</h4>
+<h5>
+	You may have concerns about how your data is handled since you will be
+	submitting the necessary information to SSH into a remote server. Kommander
+	<b>does not store any SSH information</b> without the user's consent. The
+	option is available to store the configuration on the server, making the
+	information available to you when you login from anywhere or don't store the
+	information at all, which is the <b>default setting</b>.
+</h5>
+{% endblock %}

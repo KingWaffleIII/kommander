@@ -1,0 +1,87 @@
+# Kommander
+
+**A simple web-based SSH client.**
+**It supports:**
+
+- **entering SSH login details (including private key and custom ports) and connecting**
+- **user authentication (and 2FA!)**
+- **saving configurations to access them from anywhere**
+
+## Install
+
+**Simply clone the repository:**
+
+> git clone https://github.com/KingWaffleIII/kommander.git
+
+## Configuration
+
+### Nginx
+
+**Kommander is reliant on Nginx so you must setup a configuration file or edit an existing one to server Kommander. Use the following as a template:**
+
+```txt
+server {
+	root /usr/share/nginx/html;
+    server_name _;
+
+    listen [::]:80;
+    listen 80;
+
+    # /STATIC IS NECESSARY
+
+	location /static {
+		expires -1;
+		alias /usr/share/nginx/html/static;
+	}
+
+    # /SOCKET.IO IS NECESSARY
+
+	location /socket.io {
+        # choose whatever port you need - run.sh needs to run on the same port
+
+		proxy_pass http://localhost:9000;
+	}
+
+	location / {
+        # choose whatever port you need - run.sh needs to run on the same port
+
+		proxy_pass http://localhost:8000;
+	}
+}
+```
+
+### `kommander/settings.py`
+
+**You must fill out the `CSRF_TRUSTED_ORIGINS` list in `kommander/settings.py` with your domain(s). An example of this is commented out in the same file.**
+
+### SMTP
+
+**Additionally, Django has support for password reset emails. To use this feature, you must fill in the details of an email account in `kommander/email_config.json`.**
+
+### Superuser Account
+
+**You must also change lines 53-56 in `run.sh` to your preference to set the Django administrator account. You need to supply an email and a password.**
+
+## Usage
+
+**Simply run the `run.sh` bash script. It takes the following parameters:**
+
+> `-i`: installs dependencies from the `package-lock.json` and `requirements.txt`. <br>
+> It accepts `yes` or `no`.
+
+> `-p`: the port that the Django server should run on.
+
+> `-a`: the port that the SSH gateway server should run on.
+
+## Menshen
+
+**Menshen is the underlying server that powers Kommander. It is the service that acts as a gateway (hence the name 'Menshen', after the Chinese divine guardians of doors and gates) between the user and the remote server.**
+
+## Contributing
+
+**Contributions are welcome! If you find any issues, improvements or would like a feature added, feel free to submit an issue or a pull request.**
+**Please keep in mind, however, that Kommander is a _simple_ web-based SSH client. I feel that v1.0.0 successfully meets all the criteria for a simple SSH client and therefore, am unlikely to add any new features. I will be happy to review any pull requests though.**
+
+## License
+
+**Kommander and Menshen fall under the [MIT license](https://opensource.org/licenses/MIT).**

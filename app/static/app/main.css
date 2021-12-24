@@ -1,0 +1,32 @@
+* {
+	padding: 0%;
+	margin: 0%;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Rubik", sans-serif;
+	color: white;
+	background: #202731;
+}
+
+h1 {
+	text-align: center;
+}
+
+#terminal-container {
+	width: 800px;
+	height: 600px;
+	margin: 0 auto;
+	padding: 2px;
+}
+
+#terminal-container .terminal {
+	background-color: #111;
+	color: #fafafa;
+	padding: 2px;
+}
+
+#terminal-container .terminal:focus .terminal-cursor {
+	background-color: #fafafa;
+}
