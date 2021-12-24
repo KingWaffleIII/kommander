@@ -1,7 +1,7 @@
 window.addEventListener(
 	"load",
 	async function () {
-		if (window.location.pathname === "/terminal") {
+		if (window.location.pathname === "/terminal/") {
 			const terminalContainer = document.getElementById("terminal-container");
 			const term = new Terminal({
 				cursorBlink: true,
