@@ -1,19 +1,38 @@
 #!/bin/bash
 
+while getopts i:m:p:a: flag
+do
+	case "${flag}" in
+		i) install=${OPTARG};;
+		m) mode=${OPTARG};;
+		p) port=${OPTARG};;
+		a) api_port=${OPTARG};;
+	esac
+done
+
 echo -e "\nThis script requires superuser privileges to restart Nginx for updates to static files to take effect.\n"
 if [ "$(sudo -v)" == "Sorry, user $USER may not run sudo on $HOST" ]; then
 	echo "\nYou have superuser permissions to use this script.\n"
 	exit 1
 fi
 
-while getopts i:m:p:a: flag
-do
-	case "${flag}" in
-		i) install=${OPTARG};;
-		p) port=${OPTARG};;
-		a) api_port=${OPTARG};;
-	esac
-done
+file="./pity/settings.py"
+
+if [ "$mode" == "dev" ]
+then
+	echo -e "\nDev flag supplied: enabling DEBUG...\n"
+
+	from="DEBUG = False"
+	to="DEBUG = True"
+	sed -i "s/$from/$to/" $file
+
+else
+	echo -e "\nDev flag not supplied: disabling DEBUG...\n"
+
+	from="DEBUG = True"
+	to="DEBUG = False"
+	sed -i "s/$from/$to/" $file
+fi
 
 if [ "$install" == "yes" ]
 then

@@ -70,6 +70,9 @@ server {
 > `-i`: installs dependencies from the `package-lock.json` and `requirements.txt`. <br>
 > It accepts `yes` or `no`.
 
+> `-m`: whether or not to enable developer mode. This will set `kommander.settings.DEBUG` to True, which is not appropriate for production, as well as define which site to use in `init_sites.py`.
+> Anything that isn't `dev` will be assumed to run in production mode.
+
 > `-p`: the port that the Django server should run on.
 
 > `-a`: the port that the SSH gateway server should run on.
