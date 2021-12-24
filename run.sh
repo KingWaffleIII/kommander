@@ -16,7 +16,7 @@ if [ "$(sudo -v)" == "Sorry, user $USER may not run sudo on $HOST" ]; then
 	exit 1
 fi
 
-file="./pity/settings.py"
+file="./kommander/settings.py"
 
 if [ "$mode" == "dev" ]
 then
