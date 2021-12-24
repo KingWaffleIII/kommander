@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+import pyotp
 
 def has_special_char(text: str) -> bool:
     return any(c for c in text if not c.isalnum() and not c.isspace())
@@ -37,16 +38,16 @@ class TwoFactorAuthForm(forms.Form):
         'placeholder': '123456'
     }))
 
-    def __init__(self, otp, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(TwoFactorAuthForm, self).__init__(*args, **kwargs)
-        self.otp = otp
+        self.user = user
 
     def clean(self):
         cleaned_data = super(TwoFactorAuthForm, self).clean()
         otp = cleaned_data.get('otp')
+        self.otp = int(pyotp.TOTP(self.user.totp_code).now())
 
         if otp != self.otp:
-            print("hi")
             self.add_error('otp', 'Invalid OTP!')
 
         return cleaned_data

@@ -270,10 +270,9 @@ def two_factor_auth(request):
         return redirect('app:home')
     else:
         user = models.User.objects.get(pk=request.session['2fa_user'])
-        otp = int(pyotp.TOTP(user.totp_code).now())
 
         if request.method == 'POST':
-            form = forms.TwoFactorAuthForm(otp, request.POST)
+            form = forms.TwoFactorAuthForm(user, request.POST)
 
             if form.is_valid():
                 login_user(request, user)
@@ -283,7 +282,7 @@ def two_factor_auth(request):
             else:
                 return render(request, 'app/2fa.html', {'form': form})
 
-        form = forms.TwoFactorAuthForm(otp)
+        form = forms.TwoFactorAuthForm(user)
         return render(request, 'app/2fa.html', {'form': form})
 
 

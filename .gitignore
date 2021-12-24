@@ -18,3 +18,6 @@ migrations/
 
 # ignore email_config.json
 email_config.json
+
+# ignore secret_key.json
+secret_key.json
