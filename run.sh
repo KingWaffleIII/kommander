@@ -44,7 +44,7 @@ then
 
 	npm --prefix ./menshen install
 
-	python3.10 -m pip install -r ./requirements.txt
+	python3 -m pip install -r ./requirements.txt
 else
 	echo -e "\nInstall flag not supplied: skipping installation of dependencies...\n"
 fi
@@ -67,23 +67,23 @@ cp ./menshen/node_modules/xterm-addon-fit/lib/xterm-addon-fit.js ./app/static/ap
 cp ./menshen/node_modules/socket.io/client-dist/socket.io.js ./app/static/app/socket.io/
 cp ./menshen/node_modules/xterm/css/xterm.css ./app/static/app/
 
-python3.10 manage.py makemigrations
+python3 manage.py makemigrations
 
-python3.10 manage.py migrate
+python3 manage.py migrate
 
-DJANGO_SETTINGS_MODULE=kommander.settings python3.10 init_sites.py
+DJANGO_SETTINGS_MODULE=kommander.settings python3 init_sites.py
 
 DJANGO_SUPERUSER_PASSWORD=4dm!nk3y! \
 DJANGO_SUPERUSER_USERNAME=admin \
 DJANGO_SUPERUSER_EMAIL=kingwaffl3iii@gmail.com \
-python3.10 manage.py createsuperuser --no-input
+python3 manage.py createsuperuser --no-input
 
 if [ "$silent" != "yes" ]
 then
 echo $PASSWORD | sudo -S systemctl stop nginx
 fi
 
-python3.10 manage.py collectstatic --no-input
+python3 manage.py collectstatic --no-input
 
 if [ "$silent" != "yes" ]
 then
