@@ -7,13 +7,16 @@
 - **user authentication (and 2FA!)**
 - **saving configurations to access them from anywhere**
 
+**Kommander is built on Django and Python and handles the user authentication, 2FA, storing configuration and the views.**
+**Menshen is built on Express, Xterm.js, Socket.io, SSH2 and Node.JS.**
+
 ## Install
 
 **Simply clone the repository:**
 
 > git clone https://github.com/KingWaffleIII/kommander.git
 
-**Kommander depends on Python v3.10!**
+**Kommander depends on Python v3.8+!**
 
 ## Configuration
 
@@ -93,4 +96,4 @@ server {
 
 ## License
 
-**Kommander and Menshen fall under the [MIT license](https://opensource.org/licenses/MIT).**
+**Kommander and Menshen are released under the [MIT license](https://opensource.org/licenses/MIT).**
