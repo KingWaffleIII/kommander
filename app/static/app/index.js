@@ -28,11 +28,13 @@ window.addEventListener(
 						sshUsername: config.username,
 					};
 
-					if ("password" in config) {
+					if ("password" in config && !config.password === null) {
+						console.log(config.password)
 						handshakeData.sshPassword = config.password;
 					}
 
-					if ("private_key" in config) {
+					if ("private_key" in config && !config.private_key === null) {
+						console.log(config.private_key)
 						handshakeData.sshPrivateKey = config.private_key;
 					}
 

@@ -1,5 +1,5 @@
 {
-  "name": "kommander",
+  "name": "menshen",
   "version": "1.0.0",
   "description": "A simple web-based SSH client.",
   "main": "server.js",

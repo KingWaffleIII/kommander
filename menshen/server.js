@@ -57,13 +57,22 @@ async function main() {
 			.on("error", function (err) {
 				socket.emit("data", `\r\n=== [SERVER] ERROR: ${err.message} ===\r\n`);
 			})
-			.connect({
-				host: config._query["sshHost"],
-				port: config._query["sshPort"],
-				username: config._query["sshUsername"],
-				password: config._query["sshPassword"],
-				privateKey: config._query["sshPrivateKey"],
-			});
+			if (!config._query["sshPrivateKey"]) {
+				conn.connect({
+					host: config._query["sshHost"],
+					port: config._query["sshPort"],
+					username: config._query["sshUsername"],
+					password: config._query["sshPassword"],
+				});	
+			} else {
+				conn.connect({
+					host: config._query["sshHost"],
+					port: config._query["sshPort"],
+					username: config._query["sshUsername"],
+					password: config._query["sshPassword"],
+					privateKey: config._query["sshPrivateKey"],	
+				});
+			}
 	});
 }
 
