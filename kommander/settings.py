@@ -38,10 +38,10 @@ else:
 SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = []  # e.g. ['https://kommander.planetwaffle.net', 'http://localhost:8000']
+CSRF_TRUSTED_ORIGINS = ["https://dev.planetwaffle.net"]  # e.g. ['https://kommander.planetwaffle.net', 'http://localhost:8000']
 
 
 # Application definition

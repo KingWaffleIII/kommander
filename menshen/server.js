@@ -56,23 +56,29 @@ async function main() {
 			})
 			.on("error", function (err) {
 				socket.emit("data", `\r\n=== [SERVER] ERROR: ${err.message} ===\r\n`);
-			})
-			if (!config._query["sshPrivateKey"]) {
-				conn.connect({
-					host: config._query["sshHost"],
-					port: config._query["sshPort"],
-					username: config._query["sshUsername"],
-					password: config._query["sshPassword"],
-				});	
-			} else {
-				conn.connect({
-					host: config._query["sshHost"],
-					port: config._query["sshPort"],
-					username: config._query["sshUsername"],
-					password: config._query["sshPassword"],
-					privateKey: config._query["sshPrivateKey"],	
-				});
-			}
+			});
+
+		let connConfig = {
+			host: config._query["sshHost"],
+			port: config._query["sshPort"],
+			username: config._query["sshUsername"],
+			algorithms: {
+				kex: [
+					"diffie-hellman-group1-sha1",
+					"ecdh-sha2-nistp256",
+					"ecdh-sha2-nistp384",
+					"ecdh-sha2-nistp521",
+					"diffie-hellman-group-exchange-sha256",
+					"diffie-hellman-group14-sha1",
+				],
+			},
+		};
+		if (config._query["sshPrivateKey"]) {
+			connConfig.privateKey = config._query["sshPrivateKey"];
+		} else if (config._query["sshPassword"]) {
+			connConfig.password = config._query["sshPassword"];
+		}
+		conn.connect(connConfig);
 	});
 }
 

@@ -21,3 +21,6 @@ email_config.json
 
 # ignore secret_key.json
 secret_key.json
+
+# ignore local history
+.history/
