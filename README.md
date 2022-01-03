@@ -94,6 +94,24 @@ server {
 **Contributions are welcome! If you find any issues, improvements or would like a feature added, feel free to submit an issue or a pull request.**
 **Please keep in mind, however, that Kommander is a _simple_ web-based SSH client. I feel that v1.0.0 successfully meets all the criteria for a simple SSH client and therefore, am unlikely to add any new features. I will be happy to review any pull requests though.**
 
+If your issue is to do with an SSH connection failing, please submit the output of Menshen from the console in your issue since it will help in locating the problem. The output should look similar to:
+
+```
+=== [SERVER] Connection to Client Established ===
+
+Custom crypto binding available
+Local ident: 'SSH-2.0-ssh2js1.5.0'
+Client: Trying localhost on port 22 ...
+Socket error: connect ECONNREFUSED 127.0.0.1:22
+Socket closed
+
+=== [SERVER] Connection to Client Terminated ===
+```
+
 ## License
 
 **Kommander and Menshen are released under the [MIT license](https://opensource.org/licenses/MIT).**
+
+```
+
+```

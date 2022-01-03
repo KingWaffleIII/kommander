@@ -16,6 +16,8 @@ const SSHClient = require("ssh2").Client;
 
 async function main() {
 	io.on("connection", function (socket) {
+		console.log(`\r\n=== [SERVER] Connection to Client Established ===\r\n`);
+
 		const config = socket.request;
 
 		const conn = new SSHClient();
@@ -26,6 +28,10 @@ async function main() {
 					"data",
 					`\r\n=== [SERVER] Connection to ${config._query["sshHost"]} Established ===\r\n`
 				);
+				console.log(
+					`\r\n=== [SERVER] Connection to ${config._query["sshHost"]} Established ===\r\n`
+				);
+
 				conn.shell(function (err, stream) {
 					if (err)
 						return socket.emit(
@@ -58,10 +64,15 @@ async function main() {
 				socket.emit("data", `\r\n=== [SERVER] ERROR: ${err.message} ===\r\n`);
 			});
 
+		socket.on("disconnect", function () {
+			console.log(`\r\n=== [SERVER] Connection to Client Terminated ===\r\n`);
+		});
+
 		let connConfig = {
 			host: config._query["sshHost"],
 			port: config._query["sshPort"],
 			username: config._query["sshUsername"],
+			debug: console.log,
 			algorithms: {
 				kex: [
 					"diffie-hellman-group1-sha1",
